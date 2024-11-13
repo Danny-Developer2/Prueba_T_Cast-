@@ -79,6 +79,7 @@ namespace Vehicles.Controllers
             }
 
             var vehicles = await _context.Vehicles
+                .Include(v => v.Modelos)
                 .Include(v => v.Images) 
                 .ToListAsync(); 
 

@@ -11,6 +11,7 @@ export interface Vehicule {
   images: { id: string; url: string; vehicleId: string }[];
   placas: string;
   doors: number;
+  modelos: { id: string; modelo: string; vehicleId: string }[];
 }
 
 @Component({
@@ -34,11 +35,10 @@ export class VehicleDetailComponent implements OnInit {
     }
   }
 
-  // Obtener los detalles del vehículo
   getVehicleDetails(vehicleId: string): void {
     this.http.get<Vehicule>(`${this.apiUrl}/${vehicleId}`).subscribe(
       (data) => {
-        this.vehicule = data; // Asignar los datos del vehículo a la variable 'vehicule'
+        this.vehicule = data;
         console.log(data);
       },
       (error) => {
@@ -47,22 +47,22 @@ export class VehicleDetailComponent implements OnInit {
     );
   }
 
- 
   next() {
     if (this.vehicule && this.vehicule.images.length > 0) {
       this.currentIndex = (this.currentIndex + 1) % this.vehicule.images.length;
-      console.log('Índice actual:', this.currentIndex); 
-    }
-  }
-  
-  prev() {
-    if (this.vehicule && this.vehicule.images.length > 0) {
-      this.currentIndex = (this.currentIndex - 1 + this.vehicule.images.length) % this.vehicule.images.length;
-      console.log('Índice actual:', this.currentIndex);  
+      console.log('Índice actual:', this.currentIndex);
     }
   }
 
-  
+  prev() {
+    if (this.vehicule && this.vehicule.images.length > 0) {
+      this.currentIndex =
+        (this.currentIndex - 1 + this.vehicule.images.length) %
+        this.vehicule.images.length;
+      console.log('Índice actual:', this.currentIndex);
+    }
+  }
+
   updateVehicule() {
     console.log('Actualizando datos del vehículo...');
   }
