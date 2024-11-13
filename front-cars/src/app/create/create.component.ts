@@ -109,13 +109,18 @@ export class CreateComponent {
   }
 
   addVehicle(vehicle: any): Observable<any> {
-    // se agrego la validacion por si el vehicule existe no se cree 
+    
     return this.http.get(`${this.apiUrl}`).pipe(
       switchMap((data: any) => {
         this.vehicle_Existente = data;
 
-        if (this.vehicle_Existente.some((v: any) => v.model === vehicle.model)) {
-          alert(`El nombre ${vehicle.model} ya existe`);
+        
+
+        if(
+          this.vehicle_Existente.some((v: any) => v.model === vehicle.model) ||
+          this.vehicle_Existente.some((v: any) => v.placas === vehicle.placas) 
+        ) {
+          alert(`Ya existe un auto con estos datos `);
           throw new Error("El auto ya existe");
         }
         return this.http.post(`${this.apiUrl}`, vehicle);

@@ -171,6 +171,7 @@ public async Task<IActionResult> UpdateImage(Guid vehicleId, Guid imageId, [From
         public async Task<ActionResult<IEnumerable<Vehicle>>> GetAllVehicles()
         {
             var vehicles = await _context.Vehicles
+                .Include(v => v.Modelos)
                 .Include(v => v.Images) 
                 .ToListAsync(); 
 

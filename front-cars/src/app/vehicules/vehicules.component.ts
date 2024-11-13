@@ -19,7 +19,7 @@ interface Vehicle {
   model: string;
   placas: string;
   doors: string;
-  modelo: Modelo[];  
+  modelos: Modelo[];  
   images: Image[];
 }
 
@@ -50,6 +50,7 @@ export class VehiculesComponent implements OnInit {
       (data: Vehicle[]) => {
         this.vehicles = data;  
         this.updatePagination();  
+        console.log('Modelos del vehículo:', this.vehicles.map(vehicle => vehicle));
         console.log('Total de vehículos:', this.vehicles.length);
       },
       (error) => {
