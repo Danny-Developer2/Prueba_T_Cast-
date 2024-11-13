@@ -1,28 +1,67 @@
 <div class="vehicles-container p-6">
-  <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">Catalog of Vehicles</h2>
+  <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">
+    Catalog of Vehicles
+  </h2>
 
   <!-- Tabla de vehículos -->
   <div class="overflow-x-auto">
     <table class="vehicles-table w-full text-center table-auto border-collapse">
       <thead>
         <tr>
-          <th class="px-4 py-2 bg-gray-200 text-gray-700 border">#</th>
-          <th class="px-4 py-2 bg-gray-200 text-gray-700 border">Imagen</th>
+          <th class="px-4 py-2 bg-gray-200 text-gray-700 border">Numero</th>
+          <th class="px-2 py-2 bg-gray-100 text-gray-600 border">Imagen</th>
           <th class="px-4 py-2 bg-gray-200 text-gray-700 border">Modelo</th>
           <th class="px-4 py-2 bg-gray-200 text-gray-700 border">Placas</th>
           <th class="px-4 py-2 bg-gray-200 text-gray-700 border">Puertas</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let vehicle of paginatedVehicles; let i = index" class="hover:bg-gray-50">
+        <!-- Trabajar en la implementacion de @for (item of items; track item.name) {
+<li>{{ item.name }}</li>
+} @empty {
+<li>There are no items.</li>
+} -->
+        <tr
+          *ngFor="let vehicle of paginatedVehicles; let i = index"
+          class="hover:bg-gray-50"
+        >
           <td>{{ i + 1 }}</td>
           <td class="px-4 py-2 border">
-            <div *ngFor="let image of vehicle.images">
-              <a href="vehicle-detail/{{vehicle.id}}">
-                <img [src]="image.url" alt="Vehicle Image" class="vehicle-image w-24 h-24 object-cover rounded-lg shadow-md" />
-              </a>
+            <div class="flex flex-wrap gap-2">
+              <ng-container *ngFor="let image of vehicle.images; let i = index">
+                <div *ngIf="i < 3">
+                  <!-- Muestra solo la primera imagen -->
+                  <a href="vehicle-detail/{{ vehicle.id }}">
+                    <img
+                      [src]="image.url"
+                      alt="Vehicle Image"
+                      class="vehicle-image w-24 h-24 object-cover rounded-lg shadow-md"
+                    />
+                  </a>
+                </div>
+              </ng-container>
+              <div *ngIf="vehicle.images.length > 3">
+                <a
+                  href="vehicle-detail/{{ vehicle.id }}"
+                  class="text-blue-500 underline"
+                  >Ver más</a
+                >
+                <!-- Enlace "Ver más" -->
+              </div>
             </div>
           </td>
+
+          <!-- 
+          <td class="px-4 py-2 border">
+  <div class="flex flex-wrap gap-2">
+    <div *ngFor="let image of vehicle.images">
+      <a href="vehicle-detail/{{vehicle.id}}">
+        <img [src]="image.url" alt="Vehicle Image" class="vehicle-image w-24 h-24 object-cover rounded-lg shadow-md" />
+      </a>
+    </div>
+  </div>
+</td>
+          -->
           <td class="px-4 py-2 border">{{ vehicle.model }}</td>
           <td class="px-4 py-2 border">{{ vehicle.placas }}</td>
           <td class="px-4 py-2 border">{{ vehicle.doors }}</td>
@@ -32,11 +71,24 @@
   </div>
 
   <!-- Paginación -->
+
   <div class="pagination-controls flex justify-center mt-6 space-x-4">
-    <button (click)="previousPage()" [disabled]="currentPage === 1" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-300 disabled:cursor-not-allowed">
+    <p>Pagina {{ currentPage }} de {{ totalPages }}</p>
+    <!-- Se agrega la paginacion de -->
+  </div>
+  <div class="pagination-controls flex justify-center mt-6 space-x-4">
+    <button
+      (click)="previousPage()"
+      [disabled]="currentPage === 1"
+      class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-300 disabled:cursor-not-allowed"
+    >
       Anterior
     </button>
-    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-300 disabled:cursor-not-allowed">
+    <button
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages"
+      class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-300 disabled:cursor-not-allowed"
+    >
       Siguiente
     </button>
   </div>

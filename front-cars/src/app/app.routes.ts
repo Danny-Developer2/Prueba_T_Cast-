@@ -11,23 +11,24 @@ import { UpdateImagesVeiculeComponent } from './update-images-veicule/update-ima
 import { UpdateImagesComponent } from './update-images/update-images.component';
 import { HomeComponent } from './home/home.component';
 
-
 export const routes: Routes = [
   { path: 'vehicules', component: VehiculesComponent },
-  { path: 'create', component: CreateComponent},
-  { path: 'models', component: ModelsComponent},
-  { path: 'vehicle-detail/:id', component: VehicleDetailComponent } ,
-  { path: 'vehicle-delete/:id', component: DeleteVehiculeComponent},
-  { path: 'vehicle-delete/', component: DeleteVehiculeComponent},
+  { path: 'create', component: CreateComponent },
+  { path: 'models', component: ModelsComponent },
+  { path: 'vehicle-detail/:id', component: VehicleDetailComponent },
+  { path: 'vehicle-delete/:id', component: DeleteVehiculeComponent },
+  { path: 'vehicle-delete/', component: DeleteVehiculeComponent },
   { path: 'update-vehicule/:id', component: UpdateVehiculeComponent },
-  { path: 'update-vehicule-images/:id', component: UpdateImagesVeiculeComponent },
+  {
+    path: 'update-vehicule-images/:id',
+    component: UpdateImagesVeiculeComponent,
+  },
   { path: 'update-images/:id', component: UpdateImagesComponent },
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
-
+export class AppRoutingModule {}

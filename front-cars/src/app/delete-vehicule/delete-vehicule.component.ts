@@ -17,43 +17,51 @@ export interface Vehicule {
   standalone: true,
   imports: [HttpClientModule, CommonModule],
   templateUrl: './delete-vehicule.component.html',
-  styleUrls: ['./delete-vehicule.component.css']
+  styleUrls: ['./delete-vehicule.component.css'],
 })
 export class DeleteVehiculeComponent implements OnInit {
-
-  private apiUrl = environment.apiUrl; 
+  private apiUrl = environment.apiUrl;
   vehicule: Vehicule | null = null;
-  router: any;
 
   constructor(
-    private route: ActivatedRoute,  // Para acceder a los parámetros de la URL
-    private http: HttpClient  ) {}
+    private router: Router,
+    private route: ActivatedRoute,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
-    // Obtener el parámetro 'id' de la URL
     const vehicleId = this.route.snapshot.paramMap.get('id');
-    
+
     if (vehicleId) {
-      
       this.getVehicleDetails(vehicleId);
     }
   }
 
-  
   getVehicleDetails(vehicleId: string): void {
     this.http.get<Vehicule>(`${this.apiUrl}/${vehicleId}`).subscribe(
       (data) => {
-        this.vehicule = data; 
+        this.vehicule = data;
         console.log('Detalles del vehículo:', data);
+
         this.http.delete(`${this.apiUrl}/${vehicleId}`).subscribe(
-          () => {
-            console.log('Vehículo eliminado con éxito');
-            this.vehicule = null;  
-          
+          (response) => {
+            console.log('Vehículo eliminado con éxito', response);
+            this.vehicule = null;
+
+            this.navigateToHome();
           },
           (error) => {
-            console.error('Error al eliminar el vehículo:', error);
-          });
+            if (error.status === 200 || error.status === 204) {
+              console.log(
+                'Eliminación considerada exitosa aunque hubo respuesta de error.'
+              );
+              this.vehicule = null;
+              this.navigateToHome();
+            } else {
+              console.error('Error al eliminar el vehículo:', error);
+            }
+          }
+        );
       },
       (error) => {
         console.error('Error al obtener los detalles del vehículo:', error);
@@ -61,7 +69,9 @@ export class DeleteVehiculeComponent implements OnInit {
     );
   }
 
-  // Método para eliminar el vehículo (DELETE)
-  
-  
+  private navigateToHome(): void {
+    this.router.navigate(['vehicules']).then(() => {
+      console.log('Redirigiendo a la página principal...');
+    });
+  }
 }
