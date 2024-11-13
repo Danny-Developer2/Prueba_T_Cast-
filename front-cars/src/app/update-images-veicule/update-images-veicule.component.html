@@ -1,0 +1,15 @@
+<form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()" class="create-car-container p-6 max-w-lg mx-auto bg-gray-50 border border-gray-300 rounded-lg">
+  <div class="form-group mb-4">
+    <label for="imageUrl" class="block text-gray-700 font-semibold mb-2">Image URL</label>
+    <input
+      id="imageUrl"
+      formControlName="imageUrl"
+      class="form-control w-full p-2 border border-gray-300 rounded-md text-gray-700 text-sm"
+      [value]="vehicleForm.get('imageUrl')?.value"
+    />
+  </div>
+
+  <button type="submit" [disabled]="vehicleForm.invalid" class="btn-submit w-full py-2 bg-blue-500 text-white font-semibold rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:bg-blue-600">
+    Submit
+  </button>
+</form>

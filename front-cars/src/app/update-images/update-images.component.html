@@ -1,0 +1,94 @@
+<form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()" class="create-car-container">
+  <div class="form-group">
+    <label for="model">Model</label>
+    <input id="model" formControlName="model" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="placas">Placas</label>
+    <input id="placas" formControlName="placas" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="doors">Doors</label>
+    <input id="doors" formControlName="doors" class="form-control" />
+  </div>
+
+  <div formArrayName="modelos">
+    <div *ngFor="let modelo of modelos.controls; let i = index" [formGroupName]="i" class="form-group">
+      <label for="modelo">Modelo</label>
+      <input id="modelo" formControlName="modelo" class="form-control" />
+    </div>
+    <button type="button" (click)="addModel()" class="btn-add">Add Model</button>
+  </div>
+
+  <div formArrayName="images">
+    <div *ngFor="let image of images.controls; let i = index" [formGroupName]="i" class="form-group">
+      <label for="image">Image URL</label>
+      <input id="image" formControlName="url" class="form-control" />
+    </div>
+    <button type="button" (click)="addImage()" class="btn-add">Add Image</button>
+  </div>
+
+  <button type="submit" [disabled]="vehicleForm.invalid" class="btn-submit">Submit</button>
+</form>
+
+<style>
+.create-car-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-add {
+  background-color: #28a745;
+  color: white;
+  margin-top: 10px;
+}
+
+.btn-add:hover {
+  background-color: #218838;
+}
+
+.btn-submit {
+  background-color: #007bff;
+  color: white;
+  margin-top: 20px;
+}
+
+.btn-submit:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+</style>

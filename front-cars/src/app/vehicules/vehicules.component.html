@@ -1,0 +1,43 @@
+<div class="vehicles-container p-6">
+  <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">Catalog of Vehicles</h2>
+
+  <!-- Tabla de vehículos -->
+  <div class="overflow-x-auto">
+    <table class="vehicles-table w-full text-center table-auto border-collapse">
+      <thead>
+        <tr>
+          <th class="px-4 py-2 bg-gray-200 text-gray-700 border">#</th>
+          <th class="px-4 py-2 bg-gray-200 text-gray-700 border">Imagen</th>
+          <th class="px-4 py-2 bg-gray-200 text-gray-700 border">Modelo</th>
+          <th class="px-4 py-2 bg-gray-200 text-gray-700 border">Placas</th>
+          <th class="px-4 py-2 bg-gray-200 text-gray-700 border">Puertas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicle of paginatedVehicles; let i = index" class="hover:bg-gray-50">
+          <td>{{ i + 1 }}</td>
+          <td class="px-4 py-2 border">
+            <div *ngFor="let image of vehicle.images">
+              <a href="vehicle-detail/{{vehicle.id}}">
+                <img [src]="image.url" alt="Vehicle Image" class="vehicle-image w-24 h-24 object-cover rounded-lg shadow-md" />
+              </a>
+            </div>
+          </td>
+          <td class="px-4 py-2 border">{{ vehicle.model }}</td>
+          <td class="px-4 py-2 border">{{ vehicle.placas }}</td>
+          <td class="px-4 py-2 border">{{ vehicle.doors }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginación -->
+  <div class="pagination-controls flex justify-center mt-6 space-x-4">
+    <button (click)="previousPage()" [disabled]="currentPage === 1" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-300 disabled:cursor-not-allowed">
+      Anterior
+    </button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-300 disabled:cursor-not-allowed">
+      Siguiente
+    </button>
+  </div>
+</div>

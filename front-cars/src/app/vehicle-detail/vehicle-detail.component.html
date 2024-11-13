@@ -1,0 +1,33 @@
+<div *ngIf="vehicule; else loading" class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+  <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Detalles del vehículo</h2>
+  
+  <!-- Imágenes del vehículo -->
+  <div *ngFor="let image of vehicule.images" class="flex justify-center mb-6">
+      <img [src]="image.url" alt="Imagen del vehículo" class="w-1/3 h-auto rounded-lg shadow-md" />
+  </div>
+
+  <!-- Información del vehículo -->
+  <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
+      <p class="text-lg font-medium text-gray-700 mb-2"><strong>ID:</strong> {{ vehicule.id }}</p>
+      <p class="text-lg font-medium text-gray-700 mb-2"><strong>Modelo:</strong> {{ vehicule.model }}</p>
+      <p class="text-lg font-medium text-gray-700 mb-2"><strong>Puertas:</strong> {{ vehicule.doors }}</p>
+      <p class="text-lg font-medium text-gray-700 mb-2"><strong>Placas:</strong> {{ vehicule.placas }}</p>
+  </div>
+
+  <!-- Botones de acción -->
+  <div class="flex justify-center gap-4 mb-6">
+      <a href="update-vehicule/{{vehicule.id}}">
+          <button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Actualizar datos de auto</button>
+      </a>
+      <a href="update-vehicule-images/{{vehicule.id}}">
+          <button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Agregar Nueva imagen</button>
+      </a>
+      <a href="vehicle-delete/{{vehicule.id}}">
+          <button class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">Eliminar coche</button>
+      </a>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p class="text-center text-lg text-gray-500 mt-6">Cargando detalles del vehículo...</p>
+</ng-template>
