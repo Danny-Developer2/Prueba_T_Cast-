@@ -1,0 +1,51 @@
+<div class="p-4">
+  <h1 class="text-4xl font-semibold text-center text-gray-800 mb-6">Bienvenido a FrontCars</h1>
+
+  <nav class="bg-gray-800 p-4">
+    <ul class="flex justify-center space-x-6">
+      <li><a [routerLink]="'/'" class="text-white text-lg hover:bg-gray-600 px-4 py-2 rounded transition-all">Inicio</a></li>
+      <li><a [routerLink]="'/vehicules'" class="text-white text-lg hover:bg-gray-600 px-4 py-2 rounded transition-all">Vehículos</a></li>
+      <li><a [routerLink]="'/models'" class="text-white text-lg hover:bg-gray-600 px-4 py-2 rounded transition-all">Modelos</a></li>
+    </ul>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="bg-gray-800 text-white text-center py-6 mt-12">
+  <p class="text-sm font-medium">&copy; 2025 FrontCars. Todos los derechos reservados.</p>
+</footer>
+
+<style>
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  .animate__fadeIn {
+    animation: fadeIn 2s ease-in-out;
+  }
+
+  .animate__delay-1s {
+    animation-delay: 1s;
+  }
+
+  .animate__delay-2s {
+    animation-delay: 2s;
+  }
+
+  /* Efecto de escritura */
+  .animate__typing {
+    font-size: 2rem;
+    font-family: "Courier New", Courier, monospace;
+    overflow: hidden;
+    border-right: 0.1em solid black;
+    white-space: nowrap;
+    width: 0;
+    animation: typing 4s steps(30) 1s forwards;
+  }
+</style>
