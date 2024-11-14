@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';  
-import { environment } from '../../environments/environments.development';
+import { environment } from 'src/environments/environment.development';
 
  // Actualizar la ruta para traer los modelos del array 
 

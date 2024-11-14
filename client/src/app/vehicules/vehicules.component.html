@@ -22,10 +22,13 @@
 } @empty {
 <li>There are no items.</li>
 } -->
-        <tr
-          *ngFor="let vehicle of paginatedVehicles; let i = index"
-          class="hover:bg-gray-50"
-        >
+
+        @for (item of paginatedResult; track item.name ) {
+        <li>{{ item.name }}</li>
+        } @empty {
+        <li>There are no items.</li>
+        }
+        <tr class="hover:bg-gray-50" *>
           <td>{{ i + 1 }}</td>
           <td class="px-4 py-2 border">
             <div class="flex flex-wrap gap-2">

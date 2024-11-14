@@ -28,12 +28,12 @@ export class VehiclesService {
         const respuesta = setPaginatedResponse(response, this.paginatedResult);
         return respuesta;
       }
-  
+
       let params = setPaginationHeaders(this.params().pageNumber!, this.params().pageSize!);
   
       params = params.append('orderBy', this.params().orderBy);
   
-      return this.http.get<Vehicle[]>(this.baseUrl + 'users', {observe: 'response', params}).subscribe({
+      return this.http.get<Vehicle[]>(this.baseUrl, {observe: 'response', params}).subscribe({
         next: response => {
           const respuesta = setPaginatedResponse(response, this.paginatedResult);
           this.cache.set(Object.values(this.params()).join('-'), response);

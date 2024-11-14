@@ -1,67 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { VehiclesService } from 'src/app/_services/vehicles.service';
+import { PaginatedResult } from 'src/app/_models/pagination';
+import { Vehicle } from 'src/app/_models/vehicle';
 
 @Component({
   selector: 'app-vehicules',
   standalone: true,
-  imports: [CommonModule,],  
+  imports: [CommonModule],
   templateUrl: './vehicules.component.html',
 })
-export class VehiculesComponent implements OnInit {
-  vehicles: Vehicle[] = [];  
-  paginatedVehicles: Vehicle[] = [];  
-  currentPage: number = 1;  
-  itemsPerPage: number = 5;  
-  
-  constructor(private http: HttpClient) {}
+export class VehiculesComponent {
 
-  ngOnInit(): void {
-    this.getVehicles();  
-  }
-
+  paginatedResult = signal<PaginatedResult<Vehicle[]> | null>(null);
   
-  getVehicles(): void {
-    this.http.get<Vehicle[]>(this.apiUrl).subscribe(
-      (data: Vehicle[]) => {
-        this.vehicles = data;  
-        this.updatePagination();  
-        console.log('Modelos del vehículo:', this.vehicles.map(vehicle => vehicle));
-        console.log('Total de vehículos:', this.vehicles.length);
+
+  service = inject(VehiclesService);
+
+  constructor() {
+    this.service.getVehicles();
+    effect(
+      () => {
+        this.paginatedResult.set(this.service.paginatedResult());
       },
-      (error) => {
-        console.error('Error al obtener los vehículos', error);
-      }
+      { allowSignalWrites: true }
     );
   }
 
-  
-  updatePagination(): void {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    this.paginatedVehicles = this.vehicles.slice(startIndex, endIndex); 
-    console.log('Vehículos en la página actual:', this.paginatedVehicles);
-  }
+ 
 
-  
-  nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.updatePagination();
-      console.log('Página siguiente, página actual:', this.currentPage);
-    }
-  }
-
-  
-  previousPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updatePagination();
-      console.log('Página anterior, página actual:', this.currentPage);
-    }
-  }
-
-
-  get totalPages(): number {
-    return Math.ceil(this.vehicles.length / this.itemsPerPage);
-  }
+ 
 }
