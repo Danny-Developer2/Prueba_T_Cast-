@@ -3,8 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environments.development';
-
+import { environment } from 'src/environments/environment.development'
 export interface Vehicule {
   id: string;
   model: string;

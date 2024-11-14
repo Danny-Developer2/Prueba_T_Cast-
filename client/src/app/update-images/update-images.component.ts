@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule } f
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-import { environment } from '../../environments/environments.development';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-update-images',

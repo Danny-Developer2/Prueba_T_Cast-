@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { v4 as uuidv4 } from 'uuid';
 import { Observable, switchMap } from 'rxjs';
-import { environment } from '../../environments/environments.development';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-update-vehicule',

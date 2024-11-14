@@ -11,9 +11,7 @@ import { Vehicle } from 'src/app/_models/vehicle';
   templateUrl: './vehicules.component.html',
 })
 export class VehiculesComponent {
-
   paginatedResult = signal<PaginatedResult<Vehicle[]> | null>(null);
-  
 
   service = inject(VehiclesService);
 
@@ -26,8 +24,5 @@ export class VehiculesComponent {
       { allowSignalWrites: true }
     );
   }
-
- 
-
- 
+  
 }

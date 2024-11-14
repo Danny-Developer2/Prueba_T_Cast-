@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable, switchMap } from 'rxjs';
-import { environment } from '../../environments/environments.development';
+import { environment } from 'src/environments/environment.development';
 
 
 @Component({

@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from '../../environments/environments.development';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-update-images-veicule',
