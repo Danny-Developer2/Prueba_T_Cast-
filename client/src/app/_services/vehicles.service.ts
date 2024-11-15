@@ -7,6 +7,7 @@ import { Vehicle } from "src/app/_models/vehicle";
 import { VehicleParams } from "src/app/_models/vehicleParams";
 import { setPaginatedResponse, setPaginationHeaders } from "src/app/_services/paginationHelper";
 import { environment } from "src/environments/environment";
+import { SeletOption } from "../_models/selectOption";
 
 @Injectable({
     providedIn: 'root'
@@ -70,4 +71,24 @@ export class VehiclesService {
     createVehicle(vehicleData: any) {
       return this.http.post(`${this.baseUrl}`, vehicleData).pipe();
     }
+
+  
+getBrandOptions(): SeletOption[] {
+ 
+  return [
+    {
+      id: 1, name: 'Marca 1',
+      code: null
+    },
+    {
+      id: 2, name: 'Marca 2',
+      code: null
+    },
+    {
+      id: 3, name: 'Marca 3',
+      code: null
+    },
+  ];
+}
+
 }
