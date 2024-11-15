@@ -16,8 +16,7 @@ export interface Vehicule {
   selector: 'app-delete-vehicule',
   standalone: true,
   imports: [HttpClientModule, CommonModule],
-  templateUrl: './delete-vehicule.component.html',
-  styleUrls: ['./delete-vehicule.component.css'],
+  templateUrl: './delete-vehicule.component.html'
 })
 export class DeleteVehiculeComponent implements OnInit {
   private apiUrl = environment.apiUrl;

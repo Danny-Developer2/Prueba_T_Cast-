@@ -9,15 +9,19 @@ namespace API.Controllers
 {
     public class VehiclesController(IUnitOfWork uow) : BaseApiController
     {
+
+
         [HttpGet]
-        public async Task<ActionResult<PagedList<VehicleDto>>> GetPagedListAsync(VehicleParams param) {
+        public async Task<ActionResult<PagedList<VehicleDto>>> GetPagedListAsync(VehicleParams param)
+        {
             PagedList<VehicleDto> pagedList = await uow.VehicleRepository.GetPagedListAsync(param);
 
             Response.AddPaginationHeader(pagedList);
 
             return pagedList;
         }
-        
+
+      
         [HttpPost]
         public async Task<ActionResult<VehicleDto?>> CreateAsync([FromBody] VehicleCreateDto request)
         {
@@ -39,8 +43,10 @@ namespace API.Controllers
 
             itemToCreate.VehicleBrand = new(brandId);
 
-            foreach(PhotoDto item in request.Photos) {
-                if (!string.IsNullOrEmpty(item.Url)) {
+            foreach (PhotoDto item in request.Photos)
+            {
+                if (!string.IsNullOrEmpty(item.Url))
+                {
                     itemToCreate.VehiclePhotos.Add(new(item.Url));
                 }
             }
@@ -51,29 +57,31 @@ namespace API.Controllers
 
             return await uow.VehicleRepository.GetDtoByIdAsync(itemToCreate.Id);
         }
-        
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<VehicleDto?>> GetDtoByIdAsync([FromRoute]int id)
+        public async Task<ActionResult<VehicleDto?>> GetDtoByIdAsync([FromRoute] int id)
         {
             if (!await uow.VehicleRepository.ExistsByIdAsync(id)) return NotFound($"El vehículo con ID {id} no fue encontrado.");
 
             return await uow.VehicleRepository.GetDtoByIdAsync(id);
         }
 
-        
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteVehicle(int id)
         {
+
+
             await Task.Delay(0);
 
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateAsync([FromRoute]int id, [FromBody] VehicleCreateDto request)
+        public async Task<ActionResult> UpdateAsync([FromRoute] int id, [FromBody] VehicleCreateDto request)
         {
             await Task.Delay(0);
-            
+
             return Ok();
         }
     }

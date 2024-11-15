@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { inject, Injectable, signal } from "@angular/core";
 import { of } from "rxjs";
 import { PaginatedResult } from "src/app/_models/pagination";
+import { Photo } from "src/app/_models/photo";
 import { Vehicle } from "src/app/_models/vehicle";
 import { VehicleParams } from "src/app/_models/vehicleParams";
 import { setPaginatedResponse, setPaginationHeaders } from "src/app/_services/paginationHelper";
@@ -22,24 +23,28 @@ export class VehiclesService {
     }
   
     getVehicles() {
-      const response = this.cache.get(Object.values(this.params()).join('-'));
-  
-      if (response) {
-        const respuesta = setPaginatedResponse(response, this.paginatedResult);
-        return respuesta;
+      const cacheKey = Object.values(this.params()).join('-');
+      const cachedResponse = this.cache.get(cacheKey);
+    
+      if (cachedResponse) {
+        setPaginatedResponse(cachedResponse, this.paginatedResult);
+        return;
       }
-
+    
       let params = setPaginationHeaders(this.params().pageNumber!, this.params().pageSize!);
-  
       params = params.append('orderBy', this.params().orderBy);
-  
-      return this.http.get<Vehicle[]>(this.baseUrl, {observe: 'response', params}).subscribe({
+    
+      return this.http.get<Vehicle[]>(this.baseUrl, { observe: 'response', params }).subscribe({
         next: response => {
-          const respuesta = setPaginatedResponse(response, this.paginatedResult);
-          this.cache.set(Object.values(this.params()).join('-'), response);
+          setPaginatedResponse(response, this.paginatedResult);
+          this.cache.set(cacheKey, response);
+        },
+        error: err => {
+          console.error('Error al obtener los vehículos:', err);
         }
-      })
+      });
     }
+    
   
     getByIdAync(id: number) {
       const itemToReturn: Vehicle = [...this.cache.values()]
@@ -55,5 +60,14 @@ export class VehiclesService {
       return this.http.put(`${this.baseUrl}${id}`, model).pipe(
 
       )
+    }
+
+    deletePhoto(photo: Photo){
+      return this.http.delete(this.baseUrl + '/delete-photo-card/' + photo.id).pipe()
+      
+    }
+
+    createVehicle(vehicleData: any) {
+      return this.http.post(`${this.baseUrl}`, vehicleData).pipe();
     }
 }

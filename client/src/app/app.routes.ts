@@ -1,34 +1,21 @@
-import { NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { VehiculesComponent } from './vehicules/vehicules.component';
-import { CreateComponent } from './create/create.component';
-import { ModelsComponent } from './models/models.component';
-import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
-import { UpdateVehiculeComponent } from './update-vehicule/update-vehicule.component';
-import { UpdateImagesVeiculeComponent } from './update-images-veicule/update-images-veicule.component';
-import { UpdateImagesComponent } from './update-images/update-images.component';
-import { HomeComponent } from './home/home.component';
+import { VehiclesComponent } from './vehicles/vehicles-catalog.component';
+import { VehicleCreateComponent } from './vehicles/vehicle-create.component';
+import { VehicleHomeComponent } from 'src/app/vehicles/vehicle-home.component';
+
+
+
 
 export const routes: Routes = [
-  { path: 'vehicules', component: VehiculesComponent },
 
-  // /vehicles/create
-  { path: 'vehicle/create', component: CreateComponent },
 
-  { path: 'models', component: ModelsComponent },
-  { path: 'vehicle-detail/:id', component: VehicleDetailComponent },
-
-  // eliminar
-  // { path: 'vehicle-delete/:id', component: DeleteVehiculeComponent },
-  // { path: 'vehicle-delete/', component: DeleteVehiculeComponent },
-
-  { path: 'vehicule/:id/edit', component: UpdateVehiculeComponent },
-  {
-    path: 'update-vehicule-images/:id',
-    component: UpdateImagesVeiculeComponent,
-  },
-  { path: 'update-images/:id', component: UpdateImagesComponent },
-  { path: '', component: HomeComponent },
+  { path: '', component: VehicleHomeComponent },
+  { path:'vehicles', component: VehiclesComponent},
+  { path: 'create', component: VehicleCreateComponent },
+  // { path: 'vehicle-detail/:id', component: VehicleDetailComponent },
+  // { path: 'vehicle/:id/edit', component: UpdateVehiculeComponent },
+  // { path: '', component: VehicleHomeComponent },
 ];
 
 @NgModule({
@@ -36,3 +23,5 @@ export const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+
+

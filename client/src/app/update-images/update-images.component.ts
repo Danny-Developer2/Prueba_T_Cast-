@@ -11,8 +11,7 @@ import { environment } from 'src/environments/environment.development';
   selector: 'app-update-images',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
-  templateUrl: './update-images.component.html',
-  styleUrls: ['./update-images.component.css']
+  templateUrl: './update-images.component.html'
 })
 export class UpdateImagesComponent implements OnInit {
 

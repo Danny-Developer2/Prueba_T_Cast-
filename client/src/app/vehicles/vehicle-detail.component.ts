@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development'
 export interface Vehicule {
@@ -16,9 +16,8 @@ export interface Vehicule {
 @Component({
   selector: 'app-vehicle-detail',
   standalone: true,
-  imports: [HttpClientModule, CommonModule],
+  imports: [RouterLink],
   templateUrl: './vehicle-detail.component.html',
-  styleUrls: ['./vehicle-detail.component.css'],
 })
 export class VehicleDetailComponent implements OnInit {
   vehicule: Vehicule | null = null;

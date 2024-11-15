@@ -1,0 +1,53 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="createNewVehicle()"
+  class="container p-4 border rounded bg-light"
+>
+  <div class="mb-3">
+    <label for="model" class="form-label">Model</label>
+    <input id="model" formControlName="model" class="form-control" />
+  </div>
+
+  <div class="mb-3">
+    <label for="placas" class="form-label">Placas</label>
+    <input id="placas" formControlName="placas" class="form-control" />
+  </div>
+
+  <div class="mb-3">
+    <label for="doors" class="form-label">Doors</label>
+    <input id="doors" formControlName="doors" class="form-control" />
+  </div>
+
+  <div formArrayName="Modelo">
+
+    <div class="mb-3">
+      <label for="modelo" class="form-label">ModeloL</label>
+      <input id="modelo" formControlName="modelo" class="form-control" />
+    </div>
+ 
+  </div>
+
+  <div formArrayName="images">
+    @for (photo of form.controls; track photo.controls; let i = $index) {
+    <div [formGroupName]="i" class="mb-3">
+      <label for="image" class="form-label">Image URL</label>
+      <input id="image" formControlName="url" class="form-control" />
+    </div>
+    } @empty {
+    <li aria-hidden="true"></li>
+    }
+
+    <!-- <button type="button" (click)="addImage()" class="btn btn-success w-100">
+      Add Image
+    </button> -->
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="vehicleForm.invalid"
+    class="btn btn-primary w-100 mt-3"
+    [ngClass]="{ disabled: vehicleForm.invalid }"
+  >
+    Submit
+  </button>
+</form>

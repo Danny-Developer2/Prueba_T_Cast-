@@ -10,8 +10,7 @@ import { environment } from 'src/environments/environment.development';
   selector: 'app-models',
   standalone: true,
   imports: [CommonModule, HttpClientModule],  
-  templateUrl: './models.component.html',
-  styleUrls: ['./models.component.css']
+  templateUrl: './models.component.html'
 })
 export class ModelsComponent implements OnInit {
   models: string[] = []; 

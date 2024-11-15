@@ -19,7 +19,6 @@ import { environment } from 'src/environments/environment.development';
   standalone: true, // Esto hace que el componente sea independiente
   imports: [HttpClientModule, CommonModule, FormsModule],
   templateUrl: './update-vehicule.component.html',
-  styleUrls: ['./update-vehicule.component.css'],
 })
 export class UpdateVehiculeComponent implements OnInit {
   vehicle_Existente: any = {
